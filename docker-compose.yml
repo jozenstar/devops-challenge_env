@@ -5,7 +5,7 @@ services:
     container_name: backend
     ports:
     - 8000
-    image: jozenstar/devops-challenge:v1.0.5
+    image: jozenstar/devops-challenge:${TAG}
   web:
     image: nginx
     ports: 
