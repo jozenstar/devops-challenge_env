@@ -1,0 +1,32 @@
+{
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "profile": "default",
+            "region": "eu-central-1",
+            "ami_name": "packer_docker_node",
+            "source_ami_filter": {
+                "filters": {
+                    "virtualization-type": "hvm",
+                    "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*",
+                    "root-device-type": "ebs"
+                },
+                "owners": [
+                    "099720109477"
+                ],
+                "most_recent": true
+            },
+	    "force_deregister": "true",
+            "force_delete_snapshot": "true",
+            "instance_type": "t3.medium",
+            "ssh_username": "ubuntu"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "./user_data.sh"
+        }
+    ]
+}
+
