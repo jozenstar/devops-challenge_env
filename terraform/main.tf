@@ -125,10 +125,30 @@ resource "aws_iam_role_policy" "cloudwatch_logs_rw" {
 EOF
 }
 
+resource "aws_cloudwatch_log_group" "backend" {
+  name              = "simple_web_app/backend"
+  retention_in_days = 5
+
+}
+
+resource "aws_cloudwatch_log_group" "nginx" {
+  name              = "simple_web_app/nginx"
+  retention_in_days = 5
+
+}
+
+
 resource "aws_iam_role_policy_attachment" "ssm_policy" {
   role       = aws_iam_role.simple_web_app.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
+
+
+resource "aws_eip" "simple_web_app" {
+  instance = aws_instance.simple_web_app.id
+  vpc      = true
+}
+
 
 resource "aws_instance" "simple_web_app" {
   ami                  = data.aws_ami.docker_node.id
