@@ -34,21 +34,3 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-
-  packer:
-    name: 'Packer'
-    runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        working-directory: ./packer
-        shell: bash
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Packer validate template-y without argument
-      uses: dawitnida/packer-github-actions/validate@master
-      env:
-        TEMPLATE_FILE_NAME: "*.json"
