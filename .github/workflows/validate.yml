@@ -43,7 +43,6 @@ jobs:
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
-        shell: bash
         working-directory: ./packer
 
     steps:
@@ -51,4 +50,4 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Packer Validate
-      run: packer validate *.json
+      run: "packer validate *.json"
