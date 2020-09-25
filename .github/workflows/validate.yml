@@ -38,16 +38,17 @@ jobs:
   packer:
     name: 'Packer'
     runs-on: ubuntu-latest
-    container: hashicorp/packer:light
     
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         working-directory: ./packer
+        shell: bash
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: Packer Validate
-      run: "packer validate *.json"
+    - name: Packer validate template-y without argument
+      uses: dawitnida/packer-github-actions/validate@master
+      env:
+        TEMPLATE_FILE_NAME: "*.json"
